@@ -14,7 +14,7 @@ public class DatabaseHandler extends SQLiteOpenHelper{
     private static final int DATABASE_VERSION = 1;
 
     private static final String CONTACT_TABLE_SQL = "CREATE TABLE contacts(" +
-            "id INTEGER PRIMARY KEY AUTO_INCREMENT," +
+            "id INTEGER PRIMARY KEY AUTOINCREMENT," +
             "first_name TEXT," +
             "name TEXT NOT NULL," +
             "email TEXT NOT NULL )";

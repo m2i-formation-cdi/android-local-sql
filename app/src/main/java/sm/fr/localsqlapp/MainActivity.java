@@ -41,10 +41,10 @@ public class MainActivity extends AppCompatActivity {
 
         //Instanciation de la liste qui recevra les données
         List<Map<String, String>> contactList = new ArrayList<>();
-        Map<String, String> contactCols = new HashMap<>();
 
         //Parcours du curseur
         while(cursor.moveToNext()){
+            Map<String, String> contactCols = new HashMap<>();
             //Remplisssage du tableau associatif en fonction des données du curseur
             contactCols.put("name", cursor.getString(0));
             contactCols.put("firstName", cursor.getString(1));

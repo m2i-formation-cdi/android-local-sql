@@ -5,7 +5,9 @@ import android.database.Cursor;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -14,10 +16,12 @@ import java.util.Map;
 
 import fr.sm.database.DatabaseHandler;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
 
     private ListView contactListView;
     private List<Map<String,String>> contactList;
+    private Integer selectedIndex;
+    private Map<String,String> selectedPerson;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,8 +37,11 @@ public class MainActivity extends AppCompatActivity {
         ContactArrayAdapter contactAdapter = new ContactArrayAdapter(
              this,contactList
         );
-        //Définition de l'apadter de notre listView
+        //Définition de l'adapter de notre listView
         contactListView.setAdapter(contactAdapter);
+
+        //Définition d'un écouteur d'événement pour OnItemSelectedListener
+        contactListView.setOnItemClickListener(this);
 
     }
 
@@ -72,5 +79,13 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return contactList;
+    }
+
+
+    @Override
+    public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+        this.selectedIndex = position;
+        this.selectedPerson = contactList.get(position);
+        Toast.makeText(this, "Ligne " + position + " cliquée", Toast.LENGTH_SHORT).show();
     }
 }

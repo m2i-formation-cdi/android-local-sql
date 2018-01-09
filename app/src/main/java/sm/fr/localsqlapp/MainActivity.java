@@ -78,12 +78,40 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 this.deleteSelectedContact();
                 break;
             case R.id.mainMenuOptionEdit:
-
+                this.editSelectedContact();
                 break;
         }
 
 
         return true;
+    }
+
+    /**
+     * Affichage du formulaire de contact pour modification
+     */
+    private void editSelectedContact() {
+        //Création d'une intention
+        Intent intention = new Intent(this, FormActivity.class);
+
+        //Passage des paramètres à l'intention
+        intention.putExtra("id", this.selectedPerson.get("id"));
+        intention.putExtra("name", this.selectedPerson.get("name"));
+        intention.putExtra("firstName", this.selectedPerson.get("firstName"));
+        intention.putExtra("email", this.selectedPerson.get("email"));
+
+        //Lancement de l'activité FormActivity
+        startActivityForResult(intention, 1);
+    }
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if(requestCode == 1 && resultCode == RESULT_OK){
+            Toast.makeText(this,"Mise à jour effectuée", Toast.LENGTH_SHORT)
+                    .show();
+            //Réinitialisation de la liste
+            this.contactListInit();
+        }
     }
 
     /**

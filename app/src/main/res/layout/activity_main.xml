@@ -16,6 +16,7 @@
         android:onClick="onAddContact"
         />
 
+
     <ListView
         android:id="@+id/contactListView"
         android:layout_width="match_parent"
